@@ -44,6 +44,14 @@ The application provides CRUD interfaces for each model involved in the cytology
 
 Each sample's status is tracked and can be viewed in the sample detail page, showing the history of all status changes.
 
+### Deploy
+    ```bash
+    php artisan migrate:refresh --seed
+    php artisan make:crud statuses tailwind
+    php artisan make:crud sample_types tailwind
+    php artisan make:crud samples tailwind
+    ```
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

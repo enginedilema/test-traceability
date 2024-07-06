@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('samples.index')" :active="request()->routeIs('samples.*')">
+                        {{ __('Samples') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('statuses.index')" :active="request()->routeIs('statuses.*')">
+                        {{ __('Statuses') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('sample-types.index')" :active="request()->routeIs('sample-types.*')">
+                        {{ __('Sample Types') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -70,6 +79,16 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('samples.index')" :active="request()->routeIs('samples.*')">
+                {{ __('Samples') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('statuses.index')" :active="request()->routeIs('statuses.*')">
+                {{ __('Statuses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sample-types.index')" :active="request()->routeIs('sample-types.*')">
+                {{ __('Sample Types') }}
+            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->

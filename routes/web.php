@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\SampleTypeController;
+use App\Http\Controllers\SampleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +21,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::resource('statuses', StatusController::class);
+Route::resource('sample-types', SampleTypeController::class);
+Route::resource('samples', SampleController::class);
