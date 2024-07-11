@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
             StatusesTableSeeder::class,
             SampleTypesTableSeeder::class,
             SamplesTableSeeder::class,
+            SampleTypeExfoliativeSeeder::class,
+            SampleTypePaafSeeder::class,
+            OriginLabSeeder::class,
         ]);
     }
 }

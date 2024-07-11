@@ -50,7 +50,19 @@ Each sample's status is tracked and can be viewed in the sample detail page, sho
     php artisan make:crud statuses tailwind
     php artisan make:crud sample_types tailwind
     php artisan make:crud samples tailwind
+    
+    php artisan make:crud notes tailwind
+
+    php artisan make:crud sample_type_exfoliatives tailwind
+    php artisan make:crud sample_type_paafs tailwind
+    php artisan make:crud origin_labs tailwind
+    php artisan make:crud sample_receptions tailwind
+
     ```
+
+### Playlist desenvolupament
+[Playlist Youtube](https://www.youtube.com/watch?v=5WQ1s7SdpfU&list=PLAOriCH9iN47YOEkHj1r1R3c9IKjLHk9e&pp=gAQBiAQB)
+
 
 ## License
 
