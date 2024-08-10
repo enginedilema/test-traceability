@@ -92,8 +92,11 @@ class SampleReceptionController extends Controller
     public function edit($id): View
     {
         $sampleReception = SampleReception::find($id);
+        $originLabs = OriginLab::all();
+        $sampleTypeExfoliatives = SampleTypeExfoliative::all();
+        $sampleTypePaafs = SampleTypePaaf::all();
 
-        return view('sample-reception.edit', compact('sampleReception'));
+        return view('sample-reception.edit', compact('sampleReception', 'originLabs', 'sampleTypeExfoliatives', 'sampleTypePaafs'));
     }
 
     /**

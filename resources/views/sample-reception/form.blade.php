@@ -2,7 +2,35 @@
     
     <div>
         <x-input-label for="sample_qr" :value="__('Sample QR')"/>
-        <x-text-input id="sample_qr" name="sample_qr" type="text" class="mt-1 block w-full" :value="old('sample_qr', $sampleReception?->sample_qr)" autocomplete="sample_qr" placeholder="Sample QR"/>
+        @if( $sampleReception?->sample?->qr_code === null)
+        <video id="video" style="width: 100%; max-width: 400px;"></video> <!-- Elemento video para la cámara -->        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const codeReader = new ZXing.BrowserQRCodeReader();
+                const videoElem = document.createElement('video');
+                videoElem.style.display = 'none'; // Ocultar el elemento video
+        
+                document.body.appendChild(videoElem); // Agregar el elemento video al body
+        
+                codeReader
+                    .decodeFromInputVideoDevice(undefined, 'video')
+                    .then(result => {
+                        document.querySelector('#qr_code').value = result.text;
+                        videoElem.srcObject.getTracks().forEach(track => track.stop()); // Detener la cámara
+                    })
+                    .catch(err => console.error(err));
+        
+                codeReader
+                    .listVideoInputDevices()
+                    .then(videoInputDevices => {
+                        const selectedDeviceId = videoInputDevices[0].deviceId;
+                        codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video');
+                    })
+                    .catch(err => console.error(err));
+            });
+        </script>
+        @endif
+        <x-text-input id="sample_qr" name="sample_qr" type="text" class="mt-1 block w-full" :value="old('sample_qr', $sampleReception?->sample?->qr_code)" autocomplete="sample_qr" placeholder="Sample QR"/>
         <x-input-error class="mt-2" :messages="$errors->get('sample_qr')"/>
     </div>
     <div>
