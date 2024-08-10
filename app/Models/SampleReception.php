@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class SampleReception
  *
  * @property $id
+ * @property $sample_id
  * @property $patient_name
  * @property $gender
  * @property $age
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property SampleTypePaaf $sampleTypePaaf
  * @property SampleTypeExfoliative $sampleTypeExfoliative
  * @property OriginLab $originLab
+ * @property Sample $sample
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -41,7 +43,7 @@ class SampleReception extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['patient_name', 'gender', 'age', 'identification_number', 'clinical_information', 'origin_lab_id', 'origin_lab_other', 'requesting_person', 'registration_date', 'exfoliative_sample_type_id', 'paaf_sample_type_id', 'sample_type_other', 'lateralitat', 'technical_id'];
+    protected $fillable = ['sample_id', 'patient_name', 'gender', 'age', 'identification_number', 'clinical_information', 'origin_lab_id', 'origin_lab_other', 'requesting_person', 'registration_date', 'exfoliative_sample_type_id', 'paaf_sample_type_id', 'sample_type_other', 'lateralitat', 'technical_id'];
 
 
     /**
@@ -66,6 +68,19 @@ class SampleReception extends Model
     public function originLab()
     {
         return $this->belongsTo(\App\Models\OriginLab::class, 'origin_lab_id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function sample()
+    {
+        return $this->belongsTo(\App\Models\Sample::class, 'sample_id', 'id');
+    }
+
+    public function technicalId()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'technical_id', 'id');
     }
     
 }

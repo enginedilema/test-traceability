@@ -27,20 +27,11 @@
                                     <tr>
                                         <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
                                         
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Sample Id</th>
 									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Patient Name</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Gender</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Age</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Identification Number</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Clinical Information</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Origin Lab Id</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Origin Lab Other</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Requesting Person</th>
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Origin Lab</th>
 									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Registration Date</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Exfoliative Sample Type Id</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Paaf Sample Type Id</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Sample Type Other</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Lateralitat</th>
-									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Technical Id</th>
+									<th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Technical</th>
 
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
                                     </tr>
@@ -50,20 +41,11 @@
                                         <tr class="even:bg-gray-50">
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900">{{ ++$i }}</td>
                                             
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->sample_id }}</td>
 										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->patient_name }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->gender }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->age }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->identification_number }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->clinical_information }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->origin_lab_id }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->origin_lab_other }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->requesting_person }}</td>
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->originLab->name }}</td>
 										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->registration_date }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->exfoliative_sample_type_id }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->paaf_sample_type_id }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->sample_type_other }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->lateralitat }}</td>
-										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->technical_id }}</td>
+										<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $sampleReception->technicalId->name }}</td>
 
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                 <form action="{{ route('sample-receptions.destroy', $sampleReception->id) }}" method="POST">

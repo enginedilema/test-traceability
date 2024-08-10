@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SampleReceptionRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\OriginLab;
+use App\Models\Sample;
+use App\Models\SampleTypeExfoliative;
+use App\Models\SampleTypePaaf;
+use Carbon\Carbon;
 
 class SampleReceptionController extends Controller
 {
@@ -28,8 +33,11 @@ class SampleReceptionController extends Controller
     public function create(): View
     {
         $sampleReception = new SampleReception();
+        $originLabs = OriginLab::all();
+        $sampleTypeExfoliatives = SampleTypeExfoliative::all();
+        $sampleTypePaafs = SampleTypePaaf::all();
 
-        return view('sample-reception.create', compact('sampleReception'));
+        return view('sample-reception.create', compact('sampleReception', 'originLabs', 'sampleTypeExfoliatives', 'sampleTypePaafs'));
     }
 
     /**
@@ -37,7 +45,32 @@ class SampleReceptionController extends Controller
      */
     public function store(SampleReceptionRequest $request): RedirectResponse
     {
-        SampleReception::create($request->validated());
+        $request->registration_date = Carbon::now();
+        $request->sample_id = Sample::where('qr_code', $request->sample_qr)->first()->id;
+
+        if($request->sample_type_id == 'exfoliativa'){
+            $request->exfoliative_sample_type_id = null;
+        }else{
+            $request->paaf_sample_type_id = null;
+        }
+
+        SampleReception::create([
+            'registration_date' => $request->registration_date,
+            'sample_id' => Sample::where('qr_code', $request->sample_qr)->first()->id,
+            'sample_type_id' => $request->sample_type_id,
+            'exfoliative_sample_type_id' => $request->exfoliative_sample_type_id,
+            'paaf_sample_type_id' => $request->paaf_sample_type_id,
+            'origin_lab_id' => $request->origin_lab_id,
+            'exfoliative_sample_type_id' => $request->exfoliative_sample_type_id,
+            'paaf_sample_type_id' => $request->paaf_sample_type_id,
+            'origin_lab_id' => $request->origin_lab_id,
+            'technical_id' => $request->technical_id,
+            'patient_name' => $request->patient_name,
+            'gender' => $request->gender,
+            'age' => $request->age,
+            'clinical_information' => $request->clinical_information,
+            
+        ]);
 
         return Redirect::route('sample-receptions.index')
             ->with('success', 'SampleReception created successfully.');

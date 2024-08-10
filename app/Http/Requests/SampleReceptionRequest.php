@@ -22,16 +22,11 @@ class SampleReceptionRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'sample_qr' => 'required',
 			'patient_name' => 'string',
 			'gender' => 'string',
-			'identification_number' => 'string',
-			'clinical_information' => 'string',
 			'origin_lab_id' => 'required',
-			'origin_lab_other' => 'string',
-			'requesting_person' => 'string',
-			'registration_date' => 'required',
-			'sample_type_other' => 'string',
-			'lateralitat' => 'string',
+			'registration_date' => 'string',
 			'technical_id' => 'required',
         ];
     }

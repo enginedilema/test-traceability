@@ -24,6 +24,8 @@
                             <div class="max-w-xl py-2 align-middle">
                                 <form method="POST" action="{{ route('sample-receptions.store') }}"  role="form" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="registration_date" value="{{ now() }}">
+                                    <input type="hidden" name="technical_id" value="{{ Auth::user()->id }}">
 
                                     @include('sample-reception.form')
                                 </form>

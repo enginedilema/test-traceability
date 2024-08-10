@@ -15,6 +15,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(request()->is('samples*'))
                     <x-nav-link :href="route('samples.index')" :active="request()->routeIs('samples.*')">
                         {{ __('Samples') }}
                     </x-nav-link>
@@ -24,6 +25,23 @@
                     <x-nav-link :href="route('sample-types.index')" :active="request()->routeIs('sample-types.*')">
                         {{ __('Sample Types') }}
                     </x-nav-link>
+                    @endif
+                    @if(request()->is('station1*'))
+                    <x-nav-link :href="route('sample-receptions.index')" :active="request()->routeIs('sample-receptions.*')">
+                        {{ __('Sample Receptions') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('origin-labs.index')" :active="request()->routeIs('origin-labs.*')">
+                        {{ __('Origin Labs') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('sample-type-exfoliatives.index')" :active="request()->routeIs('sample-type-exfoliatives.*')">
+                        {{ __('Sample Type Exfoliatives') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('sample-type-paafs.index')" :active="request()->routeIs('sample-type-paafs.*')">
+                        {{ __('Sample Type Paafs') }}
+                    </x-nav-link>
+                    @endif
+
+
                 </div>
             </div>
 

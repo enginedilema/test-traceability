@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sample_receptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sample_id')->constrained('samples');
             $table->string('patient_name')->nullable();
             $table->string('gender')->nullable();
             $table->integer('age')->nullable();
