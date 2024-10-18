@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Sample;
+use App\Models\Status;
 
 class SampleReceptionRequest extends FormRequest
 {
@@ -22,7 +24,21 @@ class SampleReceptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sample_qr' => 'required',
+            'sample_qr' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    $sample = Sample::where('qr_code', $value)->first();
+                    
+                    if (!$sample) {
+                        $fail(__('The selected :attribute is invalid.', ['attribute' => $attribute]));
+                    }
+
+                    // Verifica si el status es inferior a SAMPLE_RECEPTION
+                    if ($sample && $sample->status >= Status::$SAMPLE_RECEPTION) {
+                        $fail(__('The sample status must be less than SAMPLE_RECEPTION.'));
+                    }
+                },
+            ],
 			'patient_name' => 'string',
 			'gender' => 'string',
 			'origin_lab_id' => 'required',

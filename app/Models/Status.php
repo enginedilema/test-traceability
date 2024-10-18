@@ -19,6 +19,9 @@ class Status extends Model
 {
     
     protected $perPage = 20;
+    public static $NEW = 1;
+    public static $SAMPLE_RECEPTION = 2;
+    public static $SAMPLE_CUT = 3;
 
     /**
      * The attributes that are mass assignable.
