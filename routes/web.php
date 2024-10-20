@@ -10,6 +10,7 @@ use App\Http\Controllers\SampleTypeExfoliativeController;
 use App\Http\Controllers\SampleTypePaafController;
 use App\Http\Controllers\OriginLabController;
 use App\Http\Controllers\SampleReceptionController;
+use App\Http\Controllers\SampleQrController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,6 +28,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 #Sample Routes
+Route::get('samples/createqr', [SampleQrController::class, 'createqr'])->name('samples.createqr');
+Route::get('samples/availableqr', [SampleQrController::class, 'availableqr'])->name('samples.availableqr');
 Route::resource('statuses', StatusController::class);
 Route::resource('sample-types', SampleTypeController::class);
 Route::resource('samples', SampleController::class);
