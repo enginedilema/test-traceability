@@ -12,6 +12,7 @@ use App\Models\OriginLab;
 use App\Models\Sample;
 use App\Models\SampleTypeExfoliative;
 use App\Models\SampleTypePaaf;
+use App\Models\Status;
 use Carbon\Carbon;
 
 class SampleReceptionController extends Controller
@@ -54,7 +55,7 @@ class SampleReceptionController extends Controller
             $request->paaf_sample_type_id = null;
         }
 
-        SampleReception::create([
+        $sampleReception = SampleReception::create([
             'registration_date' => $request->registration_date,
             'sample_id' => Sample::where('qr_code', $request->sample_qr)->first()->id,
             'sample_type_id' => $request->sample_type_id,
@@ -70,6 +71,10 @@ class SampleReceptionController extends Controller
             'age' => $request->age,
             'clinical_information' => $request->clinical_information,
             
+        ]);
+
+        $sampleReception->sample->update([
+            'status_id' => Status::$SAMPLE_RECEPTION
         ]);
 
         return Redirect::route('sample-receptions.index')

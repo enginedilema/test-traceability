@@ -23,11 +23,9 @@ class SampleRequest extends FormRequest
     {
         return [
 			'qr_code' => 'required|string',
-			'name' => 'required|string',
 			'user_id' => 'required',
-			'sample_type_id' => 'required',
 			'status_id' => 'required',
-			'observations' => 'string',
+			'observations' => 'nullable|string',
         ];
     }
 }

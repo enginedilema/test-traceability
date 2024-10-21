@@ -35,11 +35,6 @@
         <x-input-error class="mt-2" :messages="$errors->get('qr_code')"/>
     </div>
     <div>
-        <x-input-label for="name" :value="__('Name')"/>
-        <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $sample?->name)" autocomplete="name" placeholder="Name"/>
-        <x-input-error class="mt-2" :messages="$errors->get('name')"/>
-    </div>
-    <div>
         <x-input-label for="user_id" :value="__('User')"/>
         @if(isset($sample) && $sample->user_id !== null)
             <!-- Vista Editar -->
@@ -51,17 +46,6 @@
             <input type="hidden" name="user_id" value="{{ Auth::id()}}"/>
         @endif
         <x-input-error class="mt-2" :messages="$errors->get('user_id')"/>
-    </div>
-    <div>
-        <x-input-label for="sample_type_id" :value="__('Sample Type')"/>
-        <select id="sample_type_id" name="sample_type_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full">
-            @foreach($sampleTypes as $sampleType)
-                <option value="{{ $sampleType->id }}" @selected(old('sample_type_id', $sample?->sample_type_id) == $sampleType->id)>
-                    {{ $sampleType->type }}
-                </option>
-            @endforeach
-        </select>
-        <x-input-error class="mt-2" :messages="$errors->get('sample_type_id')"/>
     </div>
     <div>
         <x-input-label for="status_id" :value="__('Status')"/>

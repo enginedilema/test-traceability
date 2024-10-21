@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Status;
 
 return new class extends Migration
 {
@@ -14,10 +15,8 @@ return new class extends Migration
         Schema::create('samples', function (Blueprint $table) {
             $table->id();
             $table->string('qr_code')->unique();
-            $table->string('name');
             $table->foreignId('user_id');
-            $table->foreignId('sample_type_id');
-            $table->foreignId('status_id');
+            $table->foreignId('status_id')->default(Status::$NEW);
             $table->string('observations')->nullable();
             $table->timestamps();
         });

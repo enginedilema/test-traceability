@@ -31,7 +31,7 @@ class Sample extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['qr_code', 'name', 'user_id', 'sample_type_id', 'status_id', 'observations'];
+    protected $fillable = ['qr_code', 'user_id', 'status_id', 'observations'];
 
     /**
      * Get the user that owns the Sample

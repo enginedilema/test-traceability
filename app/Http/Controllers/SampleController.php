@@ -64,9 +64,8 @@ class SampleController extends Controller
     {
         $sample = Sample::find($id);
         $statuses = Status::all();
-        $sampleTypes = SampleType::all();
 
-        return view('sample.edit', compact('sample', 'statuses', 'sampleTypes'));
+        return view('sample.edit', compact('sample', 'statuses'));
     }
 
     /**

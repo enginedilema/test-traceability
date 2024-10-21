@@ -24,6 +24,10 @@ class SampleQrController extends Controller
         for ($i = 1; $i <= 35; $i++) {
             $randomNumber = str_pad(mt_rand(0, 99999), 5, '0', STR_PAD_LEFT);
             $qrContent = 'Z' . $randomNumber;
+            Sample::create([
+                'qr_code' => $qrContent,
+                'status_id' => Status::$NEW,
+            ]);
     
         // Usar el builder para crear el QR con texto
         $result = Builder::create()

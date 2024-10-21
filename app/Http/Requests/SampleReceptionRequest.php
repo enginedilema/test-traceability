@@ -34,7 +34,7 @@ class SampleReceptionRequest extends FormRequest
                     }
 
                     // Verifica si el status es inferior a SAMPLE_RECEPTION
-                    if ($sample && $sample->status >= Status::$SAMPLE_RECEPTION) {
+                    if ($sample && $sample->id <= Status::$SAMPLE_RECEPTION) {
                         $fail(__('The sample status must be less than SAMPLE_RECEPTION.'));
                     }
                 },
