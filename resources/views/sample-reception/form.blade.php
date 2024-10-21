@@ -6,28 +6,35 @@
         <video id="video" style="width: 100%; max-width: 400px;"></video> <!-- Elemento video para la cámara -->        
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const codeReader = new ZXing.BrowserQRCodeReader();
-                const videoElem = document.createElement('video');
-                videoElem.style.display = 'none'; // Ocultar el elemento video
-        
-                document.body.appendChild(videoElem); // Agregar el elemento video al body
-        
-                codeReader
-                    .decodeFromInputVideoDevice(undefined, 'video')
-                    .then(result => {
-                        document.querySelector('#qr_code').value = result.text;
-                        videoElem.srcObject.getTracks().forEach(track => track.stop()); // Detener la cámara
-                    })
-                    .catch(err => console.error(err));
-        
-                codeReader
-                    .listVideoInputDevices()
-                    .then(videoInputDevices => {
-                        const selectedDeviceId = videoInputDevices[0].deviceId;
-                        codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video');
-                    })
-                    .catch(err => console.error(err));
+    const codeReader = new ZXing.BrowserQRCodeReader();
+    const videoElement = document.getElementById('video'); // Referencia correcta al elemento de video
+
+    codeReader
+        .listVideoInputDevices()
+        .then(videoInputDevices => {
+            const selectedDeviceId = videoInputDevices[0].deviceId;
+
+            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+                if (result) {
+                    console.log("QR code detected:", result.text);
+                    
+                    // Escribir el resultado en el campo de entrada
+                    document.getElementById('sample_qr').value = result.text;
+                    videoElement.style.display = 'none';
+                    // Detener la cámara correctamente
+                    if (videoElement.srcObject) {
+                        videoElement.srcObject.getTracks().forEach(track => track.stop());
+                    } else {
+                        console.error("El elemento de video no tiene un stream activo.");
+                    }
+                }
+                if (err && !(err instanceof ZXing.NotFoundException)) {
+                    console.error(err);
+                }
             });
+        })
+        .catch(err => console.error(err));
+});
         </script>
         @endif
         <x-text-input id="sample_qr" name="sample_qr" type="text" class="mt-1 block w-full" :value="old('sample_qr', $sampleReception?->sample?->qr_code)" autocomplete="sample_qr" placeholder="Sample QR"/>
